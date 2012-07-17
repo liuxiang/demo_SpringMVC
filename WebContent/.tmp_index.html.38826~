@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+    <title></title>
+	
+	<script type="text/javascript" src="js/jquery/jquery-1.7.2.js"></script>
+	   
+    <link href="js/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+    <script src="js/ligerUI/js/core/base.js" type="text/javascript"></script> 
+    <script src="js/ligerUI/js/plugins/ligerGrid.js" type="text/javascript"></script>
+	
+ <script type="text/javascript">
+    	var griddata = [ 
+		{ CustomerID: '01', CompanyName:'部门01' }, 
+		{ CustomerID: '02', CompanyName:'部门02' }, 
+		{ CustomerID: '03', CompanyName:'部门03' }, 
+		{ CustomerID: '04', CompanyName:'部门04' }, 
+		{ CustomerID: '05', CompanyName:'部门05' }, 
+		{ CustomerID: '06', CompanyName:'部门06' }, 
+		{ CustomerID: '07', CompanyName:'部门07' } 
+		]; 
+		
+        var g;
+        $(function ()
+        {
+            g = $("#maingrid4").ligerGrid({
+                columns: [ 
+                {display: '主键', name: 'CustomerID', align: 'left', width: 120,type: "text" } ,
+                { display: '公司名', name: 'CompanyName', minWidth: 60 },
+                { display: '联系名1', name: 'ContactName', width: 100, align: 'left' },
+                { display: '城市', name: 'City' }
+                ],
+				 // 方式一:当前页,静态数据(正常展示数据)
+				 //data: {Rows:[{CustomerID: '01', CompanyName:'部门01' }, { CustomerID: '02', CompanyName:'部门02' }]},
+				 //data: { Rows: griddata }, 
+				 
+				 //url: 'http://localhost:8080/demo/gridData#', // 方式二:servlet (已请求至后台,返回json数据正常,但前台Grid还是无法显示数据)
+				 url: 'http://localhost:8080/demo/org/demo.grid#',  // 方式三:Spring MVC (已请求至后台,返回json数据正常,但前台Grid还是无法显示数据)
+				 pageSize: 20, sortName: 'CustomerID',
+                width: '98%', height: '98%', checkbox: true,rownumbers:true
+            });
+            $("#pageloading").hide();
+        });
+    </script>
+</head>
+<body style="padding: 4px; overflow: hidden;">
+
+    <div class="l-loading" style="display: block" id="pageloading">
+    </div> 
+    <div id="maingrid4" style="margin: 0; padding: 0">
+    </div>
+    <div style="display: none;">
+    </div>
+
+</body>
+</html>
